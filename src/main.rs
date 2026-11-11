@@ -4,6 +4,7 @@ mod config;
 mod db;
 mod http;
 mod model;
+mod notify;
 mod signal;
 mod util;
 
