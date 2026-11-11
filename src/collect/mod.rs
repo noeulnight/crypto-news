@@ -4,6 +4,7 @@ pub mod calendar;
 pub mod derivs;
 pub mod etf;
 pub mod fed;
+pub mod liq;
 pub mod liquidity;
 pub mod macro_quotes;
 pub mod news;
@@ -11,6 +12,8 @@ pub mod onchain;
 pub mod options;
 pub mod spot;
 pub mod stables;
+pub mod whale;
+pub mod ws;
 
 use std::time::Duration;
 
@@ -68,6 +71,8 @@ pub fn spawn_all(app: &App) {
     if app.claude.is_some() {
         every(app, "news.tag", 120, news::tag);
     }
+    liq::spawn(app);
+    whale::spawn(app);
 }
 
 /// One-off history load so that 30-day z-scores are meaningful on first start. Idempotent.
