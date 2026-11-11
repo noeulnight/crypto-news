@@ -1,0 +1,277 @@
+:root {
+	/* One family, chosen by the owner. It ships with macOS and iOS, which is where this app is used. */
+	--font: 'Apple SD Gothic Neo', sans-serif;
+
+	--ground: #ffffff;
+	--ink: #17181c;
+	--ink-2: #4a4e56;
+	--ink-3: #6b7079;
+	--line: #eceef1;
+	--fill: #f4f5f7;
+	--fill-2: #e8eaee;
+
+	/* Korean market convention: red rises, blue falls. These two mean direction and nothing else. */
+	--up: #d92d20;
+	--down: #1c62d9;
+	/* The single accent. Its job: what needs attention now (major headline, warning, next event). */
+	--hot: #cf4307;
+
+	/* Dashboards read wide, feeds read narrow. */
+	--w-wide: 1120px;
+	--w-read: 720px;
+
+	color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--ground);
+	color: var(--ink);
+	font-family: var(--font);
+	font-size: 15px;
+	line-height: 1.6;
+	letter-spacing: -0.01em;
+	font-variant-numeric: tabular-nums;
+	-webkit-font-smoothing: antialiased;
+	/* Korean breaks between words, not inside them. */
+	word-break: keep-all;
+	overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+	margin: 0;
+}
+
+h1 {
+	font-size: 34px;
+	line-height: 1.25;
+	font-weight: 700;
+	letter-spacing: -0.035em;
+}
+
+h2 {
+	font-size: 20px;
+	line-height: 1.35;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+
+h3 {
+	font-size: 15px;
+	font-weight: 600;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	font: inherit;
+	letter-spacing: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+a,
+button {
+	transition:
+		color 120ms ease-out,
+		background-color 120ms ease-out;
+}
+
+:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	a,
+	button {
+		transition: none;
+	}
+}
+
+.up {
+	color: var(--up);
+}
+.down {
+	color: var(--down);
+}
+.flat {
+	color: var(--ink-3);
+}
+.sub {
+	color: var(--ink-2);
+}
+.muted {
+	color: var(--ink-3);
+}
+.hot {
+	color: var(--hot);
+}
+.nowrap {
+	white-space: nowrap;
+}
+
+/* ---- controls ---- */
+
+.btn {
+	padding: 9px 14px;
+	border-radius: 8px;
+	background: var(--fill);
+	font-size: 14px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+.btn:hover:not(:disabled) {
+	background: var(--fill-2);
+}
+.btn:active:not(:disabled) {
+	background: var(--line);
+}
+.btn:disabled {
+	color: var(--ink-3);
+	cursor: default;
+}
+
+.link {
+	color: var(--ink-2);
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+}
+.link:hover {
+	color: var(--ink);
+}
+
+/* Text toggle: the current choice is ink, the rest step back. */
+.switch {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 14px;
+}
+.switch button {
+	color: var(--ink-3);
+	font-weight: 600;
+	white-space: nowrap;
+}
+.switch button:hover {
+	color: var(--ink-2);
+}
+.switch button[aria-pressed='true'] {
+	color: var(--ink);
+}
+
+/* ---- the feed row: time on the left, what happened on the right ---- */
+
+.chip {
+	display: inline-block;
+	min-width: 46px;
+	padding: 0 6px;
+	border-radius: 6px;
+	background: var(--fill);
+	color: var(--ink-2);
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 22px;
+	text-align: center;
+	white-space: nowrap;
+}
+.chip.hot {
+	background: var(--hot);
+	color: #fff;
+}
+
+.feed {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.feed > li {
+	display: grid;
+	grid-template-columns: 46px minmax(0, 1fr);
+	column-gap: 14px;
+	align-items: start;
+	padding: 14px 0;
+}
+
+.daybar {
+	margin: 28px 0 6px;
+	padding: 9px 14px;
+	border-radius: 10px;
+	background: var(--fill);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+/* ---- the board row: name on the left, numbers on the right ---- */
+
+.table-wrap {
+	overflow-x: auto;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th,
+td {
+	padding: 11px 0 11px 20px;
+	border-bottom: 1px solid var(--line);
+	text-align: right;
+	white-space: nowrap;
+}
+th {
+	padding-top: 0;
+	padding-bottom: 8px;
+	color: var(--ink-3);
+	font-size: 13px;
+	font-weight: 500;
+}
+th:first-child,
+td:first-child {
+	padding-left: 0;
+	text-align: left;
+}
+tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+.empty {
+	padding: 10px 0;
+	color: var(--ink-3);
+	font-size: 14px;
+}
+
+.pagehead {
+	margin-bottom: 28px;
+}
+.section {
+	margin-top: 56px;
+}
+.pagehead + .section,
+.section:first-child {
+	margin-top: 0;
+}
+.read {
+	max-width: var(--w-read);
+	margin: 0 auto;
+}
