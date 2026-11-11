@@ -1,4 +1,5 @@
 mod app;
+mod brief;
 mod claude;
 mod collect;
 mod config;
