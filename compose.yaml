@@ -1,6 +1,6 @@
 services:
   crypto-news:
-    image: ghcr.io/noeulnight/crypto-news:latest
+    image: ghcr.io/whoisdreamer/crypto-news:latest
     build: .
     ports:
       - "127.0.0.1:8787:8787"
