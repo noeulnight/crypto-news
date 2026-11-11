@@ -4,6 +4,7 @@ mod collect;
 mod config;
 mod db;
 mod http;
+mod judge;
 mod model;
 mod notify;
 mod signal;
