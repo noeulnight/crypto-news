@@ -15,7 +15,7 @@ docker run --detach --name "$container" \
   --publish 127.0.0.1::8787 --volume "$volume:/app/data" "$image"
 port=$(docker port "$container" 8787/tcp | head -1 | cut -d: -f2)
 base="http://127.0.0.1:$port"
-curl --fail --silent --show-error --retry 30 --retry-connrefused --retry-delay 1 \
+curl --fail --silent --show-error --retry 30 --retry-all-errors --retry-delay 1 \
   "$base/api/status" >/dev/null
 curl --fail --silent --show-error "$base/" | grep -q '<!doctype html>'
 curl --fail --silent --show-error "$base/news" | grep -q '<!doctype html>'
@@ -26,6 +26,8 @@ docker exec "$container" test -s /app/data/crypto-news.db
 # A marker confirms the same writable volume survives a container restart.
 docker exec "$container" touch /app/data/.smoke
 docker restart "$container" >/dev/null
-curl --fail --silent --show-error --retry 30 --retry-connrefused --retry-delay 1 \
+port=$(docker port "$container" 8787/tcp | head -1 | cut -d: -f2)
+base="http://127.0.0.1:$port"
+curl --fail --silent --show-error --retry 30 --retry-all-errors --retry-delay 1 \
   "$base/api/status" >/dev/null
 docker exec "$container" test -f /app/data/.smoke
