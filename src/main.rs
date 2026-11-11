@@ -1,5 +1,6 @@
 mod app;
 mod claude;
+mod collect;
 mod config;
 mod db;
 mod http;
