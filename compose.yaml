@@ -1,0 +1,20 @@
+services:
+  crypto-news:
+    image: ghcr.io/noeulnight/crypto-news:latest
+    build: .
+    ports:
+      - "127.0.0.1:8787:8787"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8787
+      DB_PATH: /app/data/crypto-news.db
+      WEB_DIR: /app/web/build
+    volumes:
+      - data:/app/data
+    restart: unless-stopped
+
+volumes:
+  data:

@@ -6,6 +6,7 @@ pub struct Telegram {
 }
 
 pub struct Config {
+    pub host: String,
     pub port: u16,
     pub db_path: String,
     pub web_dir: String,
@@ -27,6 +28,7 @@ fn var(name: &str) -> Option<String> {
 impl Config {
     pub fn from_env() -> Self {
         Self {
+            host: var("HOST").unwrap_or_else(|| "127.0.0.1".into()),
             port: var("PORT").and_then(|p| p.parse().ok()).unwrap_or(8787),
             db_path: var("DB_PATH").unwrap_or_else(|| "data/crypto-news.db".into()),
             web_dir: var("WEB_DIR").unwrap_or_else(|| "web/build".into()),

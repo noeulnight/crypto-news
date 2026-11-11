@@ -32,8 +32,8 @@ async fn main() -> Result<()> {
         claude = app.claude.is_some(),
         telegram = cfg.telegram.is_some(),
         whale_alert = app.whale_enabled(),
-        "listening on http://127.0.0.1:{}",
-        cfg.port
+        "listening on http://{}:{}",
+        cfg.host, cfg.port
     );
 
     let jobs = app.clone();
@@ -46,7 +46,7 @@ async fn main() -> Result<()> {
         brief::spawn(&jobs);
     });
 
-    let listener = tokio::net::TcpListener::bind(("127.0.0.1", cfg.port)).await?;
+    let listener = tokio::net::TcpListener::bind((cfg.host.as_str(), cfg.port)).await?;
     axum::serve(listener, api::router(app)).await?;
     Ok(())
 }

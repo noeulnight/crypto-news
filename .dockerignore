@@ -1,0 +1,12 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+data
+target
+web/node_modules
+web/.svelte-kit
+web/build
+web/.env
+web/.env.*
